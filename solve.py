@@ -1,9 +1,22 @@
+"""
+name: solve.py
+
+author:             Rick Cornelisse
+student number:     12367885
+
+Solves a sudoku using DFS.
+Contains:
+- the solve strategy: def solve
+- the main function  
+"""
+
 from __future__ import annotations
 from typing import Union
 
 import argparse
 import os
 import sys
+import time
 
 from sudoku import Sudoku, load_from_file
 
@@ -28,6 +41,7 @@ def solve(sudoku: Sudoku) -> Union[Sudoku, None]:
 
         # Try to solve the remaining sudoku
         if solve(sudoku):
+            # breakpoint()
             return sudoku
 
         # If that option did not lead to a solution, unplace
@@ -61,6 +75,9 @@ if __name__ == "__main__":
 
     # Solve the puzzle args.number_of_runs times
     print("SOLVING...")
+
+    start = time.time()
+
     for i in range(args.number_of_runs):
         solved_sudoku = solve(sudoku)
 
@@ -68,8 +85,14 @@ if __name__ == "__main__":
         if i < args.number_of_runs - 1:
             sudoku = load_from_file(puzzle_path)
 
-    print("DONE SOLVING")
+    end = time.time()
 
     # Show the solution
     print()
     print(solved_sudoku)
+
+    # Show time to solve
+    print()
+    print("Time to solve:")
+    print(f"{end-start} (seconds)")
+    print()
