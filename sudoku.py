@@ -19,7 +19,7 @@ class Sudoku:
     """A mutable sudoku puzzle."""
 
     def __init__(self, puzzle: Iterable[Iterable]):
-        self._grid: list[list[int]] = np.array(puzzle)
+        self._grid: np.array[np.array[int]] = np.array(puzzle)
 
     def place(self, value: int, x: int, y: int) -> None:
         """Place value at x,y."""
@@ -63,9 +63,6 @@ class Sudoku:
         for j in range(9):
             values.add(self.value_at(j,i))
 
-        # strip 0 as we do not consider that an option
-        values.remove(0)
-
         return values
 
     def column_values(self, j: int) -> Iterable[int]:
@@ -76,9 +73,6 @@ class Sudoku:
         values = set()
         for i in range(9):
             values.add(self.value_at(j,i))
-
-        # strip 0 as we do not consider that an option
-        values.remove(0)
 
         return values
 
@@ -101,9 +95,6 @@ class Sudoku:
         for x in range(x_start, x_start + 3):
             for y in range(y_start, y_start + 3):
                 values.add(self.value_at(x,y))
-
-        # strip 0 as we do not consider that an option
-        values.remove(0)
 
         return values
 
